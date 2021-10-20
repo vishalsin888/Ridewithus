@@ -1,0 +1,77 @@
+body {
+	font-size: 16px;
+}
+
+.header {
+	height: 65vh;
+	width: 100%;
+	top: 100px;
+	color: white;
+	background: linear-gradient(to right, rgba(34, 57, 187, 0.9),
+		rgba(170, 97, 97, 0.5)),
+		url(https://media.istockphoto.com/vectors/online-map-navigation-for-car-at-large-tablet-vector-illustration-vector-id1253841604?b=1&k=20&m=1253841604&s=612x612&w=0&h=FZKLuDJViKAKeia77WF1ZaEAOFtIRyFf3tXiNNl9AFA=);
+}
+
+.login-sidebar {
+	height: 50vh;
+	width: 100%;
+	top: 100px;
+	color: white;
+	background:
+		url(https://media.istockphoto.com/vectors/illustration-happy-company-people-in-car-carpool-vector-id1094713106?b=1&k=20&m=1094713106&s=170667a&w=0&h=vQt_PzDuiu1de1zjcMqZ-IUwMi6jlpkBXi0iNNpjo28=);
+}
+
+.signup-sidebar {
+	height: 50vh;
+	width: 100%;
+	top: 100px;
+	color: white;
+	background:
+		url(https://media.istockphoto.com/vectors/front-view-of-a-taxi-cab-a-driver-and-a-passenger-on-a-front-seat-a-vector-id1297272898?b=1&k=20&m=1297272898&s=170667a&w=0&h=aSbJ5paKnVgeDV3EyJt0t13xPPggWImBwKcCZWpVCr4=);
+}
+
+.cabs_header {
+	height: 35vh;
+	width: 100%;
+	top: 100px;
+	color: white;
+	background: linear-gradient(to right, rgba(34, 57, 187, 0.9),
+		rgba(170, 97, 97, 0.5)),
+		url(https://media.istockphoto.com/vectors/online-map-navigation-for-car-at-large-tablet-vector-illustration-vector-id1253841604?b=1&k=20&m=1253841604&s=612x612&w=0&h=FZKLuDJViKAKeia77WF1ZaEAOFtIRyFf3tXiNNl9AFA=);
+}
+.publishpage{
+	height: 74vh;
+	width: 100%;
+	top: 100px;
+	color: white;
+	background: linear-gradient(to right, rgba(34, 57, 187, 0.9),
+		rgba(170, 97, 97, 0.5)),
+		url(https://cdn.dnaindia.com/sites/default/files/styles/full/public/2019/09/17/868494-carpooling-service-istock-091719.jpg);
+}
+.ridespage{
+	height: 40vh;
+	width: 100%;
+	top: 100px;
+	color: white;
+	background: linear-gradient(to right, rgba(34, 57, 187, 0.9),
+		rgba(170, 97, 97, 0.5)),
+		url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/friends-in-a-car-1555269228.jpg?crop=0.625xw:0.469xh;0.223xw,0.303xh&resize=1200:*);
+}
+#cab_from li, #cab_to li{
+	list-style-type: none;
+	color:black;
+}
+#cab_from li label input, #cab_to li label input{
+	    margin-right: 5px
+}
+#cab_from li label, #cab_to li label{
+	    margin-bottom: 0px
+}
+#cab_from, #cab_to{
+	background: white;
+	position: relative;
+	left: 15%;
+}
+.list-group-item{
+	padding: 0px;
+}

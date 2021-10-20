@@ -1,0 +1,42 @@
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_distance`(
+from_lattitude float,
+from_longitude float,
+to_lattitude float,
+to_longitude float) RETURNS float
+    READS SQL DATA
+    DETERMINISTIC
+BEGIN
+RETURN (select round(abs(3956*2*ASIN(SQRT(POWER(SIN((from_lattitude - to_lattitude)
+*pi()/180/2),2)+COS(from_lattitude * pi()/180) * COS(to_lattitude * pi() /180)
+* POWER(SIN((from_longitude - to_longitude) * pi()/180/2),2))) * 1.609344),2) as distance_in_km);
+
+END
+
+
+
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchCitiesList`(IN p_threeChars varchar(100))
+BEGIN
+SELECT distinct cityid, cityname,lattitude , longitude 
+FROM carpool.cities 
+where lower(cityname) LIKE concat(p_threeChars , '%')
+order by cityname;
+END
+
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchCabsList`(
+IN p_from varchar(100), 
+IN p_to varchar(100),
+IN p_from_lattitude varchar(100), 
+IN p_from_longitude varchar(100), 
+IN p_to_lattitude varchar(100),
+IN p_to_longitude varchar(100)
+)
+BEGIN
+SELECT distinct round(get_distance(p_from_lattitude,p_from_longitude,p_to_lattitude,p_to_longitude)),
+ cabname , cabnumber , cabdrivername , cablattitude , cablongitude
+FROM carpool.cabs
+where cablattitude = p_from_lattitude and cablongitude = p_from_longitude;
+END
