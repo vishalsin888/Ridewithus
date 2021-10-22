@@ -117,8 +117,8 @@
             <input type="number" class="form-control" id="card-number">
           </div>
            <div style="width: 30%;display: inline-block;" class="mb-3">
-            <label for="Cvv" class="col-form-label">Cvv</label>
-            <input type="number" class="form-control" id="Cvv">
+            <label for="cvv" class="col-form-label">Cvv</label>
+            <input type="number" class="form-control" id="cvv">
           </div>
            <div class="mb-3" style="width:68%;display: inline-block;">
             <label for="amount" class="col-form-label">Amount</label>

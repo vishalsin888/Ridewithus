@@ -53,12 +53,29 @@ public class RegisterController {
 		return this.userRegisterService.getCabs(from, to, from_lattitude, from_longitude,to_lattitude, to_longitude);
 	}
 	
-	@PostMapping("/bookRide")
-	public RideBean bookRide(@RequestBody RideBean rideBean,ModelMap model) {
-		System.out.println("in");
-		model.addAttribute("LoggedIn", "LoggedIn");
-		return this.userRegisterService.bookRide(rideBean);
+	@GetMapping("/bookRide")
+	public Boolean bookRide(
+			@RequestParam("from") String from, 
+			@RequestParam("to") String to,
+			@RequestParam("vehicle") String vehicle, 
+			@RequestParam("distance") String distance, 
+			@RequestParam("fare") String fare,
+			@RequestParam("cardnumber") String cardnumber,
+			@RequestParam("cvv") String cvv,
+			@RequestParam("payeename") String payeename
+			){
+		return this.userRegisterService.bookRide(from, to, vehicle, distance,fare, cardnumber,cvv,payeename);
 	}
+	
+	
+	
+	
+//	@PostMapping("/bookRide")
+//	public RideBean bookRide(@RequestBody RideBean rideBean,ModelMap model) {
+//		System.out.println("in");
+//		model.addAttribute("LoggedIn", "LoggedIn");
+//		return this.userRegisterService.bookRide(rideBean);
+//	}
 	
 		
 

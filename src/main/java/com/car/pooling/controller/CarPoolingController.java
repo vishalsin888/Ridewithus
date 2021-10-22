@@ -47,6 +47,7 @@ public class CarPoolingController {
 	@RequestMapping(value = "/allrides")
 	public String allrides(ModelMap model) {
 		model.addAttribute("LoggedIn", "LoggedIn");
+		
 		return "myrides";
 	}
 	

@@ -18,5 +18,5 @@ public interface UserRegisterService{
 	
 	public ResponseEntity<List<CabsBean>> getCabs(String from, String to,String from_lattitude,String from_longitude, String to_lattitude, String to_longitude);
 	
-	public RideBean bookRide(RideBean rideBean);
+	public Boolean bookRide(String from, String to,String vehicle,String distance, String fare, String cardnumber, String cvv , String payeename);
 }

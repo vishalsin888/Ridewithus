@@ -39,36 +39,37 @@ $("#location_to").on("keyup", function(){
 });
 
 $("#pay_proceed").on("click" , function(){
-	var rideData = {};
-	rideData["from"] = $("#looking_from").val();
-	rideData["to"] = $("#going_to").val();
-	rideData["vehicle"] = $("."+pay_clz).parent(".bknow").siblings(".c_type").text();
-	rideData["distance"] = $("."+pay_clz).parent(".bknow").siblings(".dist").text();
-	rideData["fare"] = $("."+pay_clz).parent(".bknow").siblings(".amt").text();
-	rideData["cardnumber"] =$("#card-number").val();
-	rideData["cvv"] = $("#cvv").val();
-	rideData["payeename"] = $("#recipient-name").val();
-	
 	
 	$.ajax({
 		type : 'GET',
 		url : '/bookRide',
-		data : JSON.stringify(rideData),
+		data : {
+			from : $("#looking_from").val(),
+			to : $("#going_to").val(),
+			vehicle :$("."+pay_clz).parent(".bknow").siblings(".c_type").text(),
+			distance :  $("."+pay_clz).parent(".bknow").siblings(".dist").text(),
+			fare : $("."+pay_clz).parent(".bknow").siblings(".amt").text(),
+			cardnumber : $("#card-number").val(),
+			cvv : $("#cvv").val(),
+			payeename :$("#recipient-name").val()
+		},
 		contentType: "application/json",
 		dataType: 'json',
         cache: false,
 		success : function(responseJson){
-			alert('succ');
+			//alert('succ');
+			
+			window.location.href = "/allrides";
+			//document.location.reload();
 			
 		},
 		error : function (){
-			alert('error');
-			//document.location.reload();
+			//alert('error');
+			document.location.reload();
 		}
 	});
 	
 });
-
 
 });
 
@@ -210,6 +211,39 @@ function searchCityList(cityChars, processBy){
 		error : function (){
 			alert('error');
 			//document.location.reload();
+		}
+	});
+	
+}
+
+function loadAllRides(){
+	
+	$.ajax({
+		type : 'GET',
+		url : '/bookRide',
+		data : {
+			from : $("#looking_from").val(),
+			to : $("#going_to").val(),
+			vehicle :$("."+pay_clz).parent(".bknow").siblings(".c_type").text(),
+			distance :  $("."+pay_clz).parent(".bknow").siblings(".dist").text(),
+			fare : $("."+pay_clz).parent(".bknow").siblings(".amt").text(),
+			cardnumber : $("#card-number").val(),
+			cvv : $("#cvv").val(),
+			payeename :$("#recipient-name").val()
+		},
+		contentType: "application/json",
+		dataType: 'json',
+        cache: false,
+		success : function(responseJson){
+			//alert('succ');
+			
+			window.location.href = "/allrides";
+			//document.location.reload();
+			
+		},
+		error : function (){
+			//alert('error');
+			document.location.reload();
 		}
 	});
 	
