@@ -81,6 +81,27 @@ values (FLOOR(RAND()*(1000000)),p_from,p_to,p_vehicle,p_distance,p_fare,p_cardnu
 END
 
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `publishRide`(
+IN p_from_lattitude varchar(100), 
+IN p_from_longitude varchar(100),
+IN p_vehicle varchar(100), 
+IN p_cabnumber varchar(100), 
+IN p_cabdrivername varchar(100),
+IN p_no_passengers varchar(100)
+)
+BEGIN
+declare seq_number int default 0;
+SELECT next_val FROM carpool.hibernate_sequence into seq_number;
+insert into cabs
+values (seq_number+1,p_vehicle, p_cabnumber ,p_cabdrivername ,
+p_from_lattitude ,p_from_longitude,
+p_no_passengers
+);
+
+update carpool.hibernate_sequence set next_val = seq_number+1;
+commit;
+END
+
 Table data
 
 '1', 'XUV', '1111', 'ABC', '19.05', '72.90', '4'
