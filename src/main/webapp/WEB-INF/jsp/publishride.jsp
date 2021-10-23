@@ -58,9 +58,9 @@
 															<option value="ACCESS">ACCESS</option>
 															<option value="XUV">XUV</option>
 															<option value="MINI">MINI</option>
-															<option value="SEDAN">AUTO</option>
-															<option value="ACCESS">MICRO</option>
-															<option value="XUV">PLAY</option>
+															<option value="AUTO">AUTO</option>
+															<option value="MICRO">MICRO</option>
+															<option value="PLAY">PLAY</option>
 														</select>
 													</div>
 													<div class="input-group mb-2">

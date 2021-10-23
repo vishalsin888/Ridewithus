@@ -343,7 +343,7 @@ function loadAllRides(){
 			console.log(responseJson);
 			JSON.stringify(responseJson);
 			$("#rides_data").show();
-			$("#ride_data_btn").hide();
+			$("#rides_data_btn").hide();
 			$.each(responseJson , function(key,value){
 				$("#myrides_data").append(
 					'<tr>'+
@@ -360,7 +360,7 @@ function loadAllRides(){
 		},
 		error : function (){
 			$("#rides_data").hide();
-			$("#ride_data_btn").show();
+			$("#rides_data_btn").show();
 			alert('error');
 			document.location.reload();
 		}
