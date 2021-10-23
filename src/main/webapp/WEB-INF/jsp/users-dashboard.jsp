@@ -20,8 +20,7 @@
 											<input type="text" id="location_from" style="width: 70%;">
 											<input type="hidden" id="looking_from" value=""> 
 											<input type="hidden" id="from_lattitude" value=""> 
-											<input
-												type="hidden" id="from_longitude" value="">
+											<input type="hidden" id="from_longitude" value="">
 											<ul
 												class="list-group"
 												style="display: none; width: 70%;" id="cab_from">
@@ -37,8 +36,7 @@
 											<input type="text" id="location_to" style="width: 70%;">
 											<input type="hidden" id="going_to" value=""> 
 											<input type="hidden" id="to_lattitude" value=""> 
-											<input
-												type="hidden" id="to_longitude" value=""> 
+											<input type="hidden" id="to_longitude" value=""> 
 											<ul
 												class="list-group"
 												style="display: none; width: 70%;" id="cab_to">

@@ -1,5 +1,7 @@
 package com.car.pooling.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.car.pooling.models.CabsBean;
 import com.car.pooling.models.RegisterUser;
 import com.car.pooling.models.RideBean;
 import com.car.pooling.service.UserRegisterService;
@@ -73,16 +76,18 @@ public class RegisterController {
 		return this.userRegisterService.getAllRides();
 	}
 	
-	
-	
-	
-//	@PostMapping("/bookRide")
-//	public RideBean bookRide(@RequestBody RideBean rideBean,ModelMap model) {
-//		System.out.println("in");
-//		model.addAttribute("LoggedIn", "LoggedIn");
-//		return this.userRegisterService.bookRide(rideBean);
-//	}
-	
+	@GetMapping("/publishRide")
+	public Boolean publishRide(
+			@RequestParam("from_lattitude") String from_lattitude, 
+			@RequestParam("from_longitude") String from_longitude,
+			@RequestParam("vehicle") String vehicle, 
+			@RequestParam("cabnumber") String cabnumber, 
+			@RequestParam("cabdrivername") String cabdrivername,
+			@RequestParam("no_passengers") String no_passengers
+			){
+		System.out.println("in publish");
+		return this.userRegisterService.publishRide(from_lattitude, from_longitude, vehicle, cabnumber, cabdrivername, no_passengers);
+	}
 		
 
 }

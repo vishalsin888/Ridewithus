@@ -20,23 +20,38 @@
 														<div class="input-group-prepend">
 															<span class="input-group-text" id="basic-addon1"><i class="fas fa-plane-departure" style="color: #5e066e;"></i></span>
 														</div>
+														<input type="hidden" id="from_location_leaving" value=""> 
+														<input type="hidden" id="from_lattitude_leaving" value=""> 
+														<input type="hidden" id="from_longitude_leaving" value="">
 														<input type="text" class="form-control" id="leaving_from"
 															placeholder="Leaving from..." aria-label="Username"
 															aria-describedby="basic-addon1">
+														<ul
+															class="list-group"
+															style="display: none;width: 88%;position: absolute;top: 37px;left:12%;z-index: 999;" id="cab_from_leaving">
+			
+														</ul>
 													</div>
 													<div class="input-group mb-2">
 														<div class="input-group-prepend">
 															<span class="input-group-text" id="basic-addon1"><i class="fas fa-plane-arrival" style="color: #5e066e;"></i></span>
 														</div>
+														<input type="hidden" id="to_location_going" value=""> 
+														<input type="hidden" id="to_lattitude_going" value=""> 
+														<input type="hidden" id="to_longitude_going" value=""> 
 														<input type="text" class="form-control" id="going_towards"
 															placeholder="Going to..." aria-label="Username"
 															aria-describedby="basic-addon1">
+														<ul class="list-group"
+															style="display: none;width: 88%;position: absolute;top: 37px;left:12%;z-index: 999;" id="cab_towards_going">
+			
+														</ul>
 													</div>
 													<div class="input-group mb-2">
 														<div class="input-group-prepend">
 															<label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-taxi" style="color: #5e066e;"></i></label>
 														</div>
-														<select class="custom-select" id="cabType">
+														<select class="custom-select" id="publishCabType">
 															<option selected disabled="disabled">Choose...</option>
 															<option value="PRIME">PRIME</option>
 															<option value="SEDAN">SEDAN</option>
@@ -52,7 +67,7 @@
 														<div class="input-group-prepend">
 															<span class="input-group-text" id="basic-addon1"><i class="fas fa-address-card" style="color: #5e066e;"></i></span>
 														</div>
-														<input type="text" class="form-control" id="cabNumber"
+														<input type="text" class="form-control" id="publishCabNumber"
 															placeholder="vehicle Number" aria-label="Username"
 															aria-describedby="basic-addon1">
 													</div>
@@ -60,7 +75,7 @@
 														<div class="input-group-prepend">
 															<span class="input-group-text" id="basic-addon1"><i class="fas fa-id-badge" style="color: #5e066e;"></i></span>
 														</div>
-														<input type="text" class="form-control" id="cabDriverName"
+														<input type="text" class="form-control" id="publishCabDriverName"
 															placeholder="Driver Name" aria-label="Username"
 															aria-describedby="basic-addon1">
 													</div>
@@ -68,7 +83,7 @@
 														<div class="input-group-prepend">
 															<label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-user-friends" style="color: #5e066e;"></i></label>
 														</div>
-														<select class="custom-select" id="no_of_passengers">
+														<select class="custom-select" id="publish_no_of_passengers">
 															<option selected disabled="disabled">Choose...</option>
 															<option value="1">One</option>
 															<option value="2">Two</option>

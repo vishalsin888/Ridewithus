@@ -27,6 +27,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 	private final static String CABS_PROC = ".fetchCabsList";
 	private final static String BOOKRIDE_PROC = ".saveBookedRide";
 	private final static String GETALL_RIDES = ".getAllRides";
+	private final static String PUBLISH_RIDE = ".publishRide";
 	
 	@Autowired
 	private RegisterUserRepo registerUserRepo;
@@ -122,6 +123,30 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 		StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery(dbName + GETALL_RIDES);
 		return ResponseEntity.ok(query.getResultList());
 		
+	}
+
+	@Override
+	public Boolean publishRide(String from_lattitude, String from_longitude, String vehicle, String cabnumber,
+			String cabdrivername, String no_passengers) {
+		// TODO Auto-generated method stub
+		String dbName = env.getProperty("spring.jpa.properties.hibernate.default_schema");
+		StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery(dbName + PUBLISH_RIDE);
+        query.registerStoredProcedureParameter("p_from_lattitude", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("p_from_longitude", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("p_vehicle", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("p_cabnumber", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("p_cabdrivername", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("p_no_passengers", String.class, ParameterMode.IN);
+       
+        query.setParameter("p_from_lattitude", from_lattitude);
+        query.setParameter("p_from_longitude", from_longitude);
+        query.setParameter("p_vehicle", vehicle);
+        query.setParameter("p_cabnumber", cabnumber);
+        query.setParameter("p_cabdrivername", cabdrivername);
+        query.setParameter("p_no_passengers", no_passengers);
+        
+        boolean flag = query.execute();
+        return flag;
 	}
 
 

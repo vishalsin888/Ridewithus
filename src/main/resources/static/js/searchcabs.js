@@ -10,10 +10,12 @@ $("#search_cabs").on("click", function(event){
 	searchCabsInBetween();
 });
 
+//search ride
 $("#location_from").on("keyup", function(){
 	
 	if($("#location_from").val().length == 3 ){
-		searchCityList($("#location_from").val(), "from");
+		$("#cab_from").html("");
+		searchCityList($("#location_from").val(), "from","booking");
 	}
 	
 	if($("#location_from").val().length < 3 ){
@@ -25,9 +27,11 @@ $("#location_from").on("keyup", function(){
 	
 });
 
+//search ride
 $("#location_to").on("keyup", function(){
 	if($("#location_to").val().length == 3 ){
-		searchCityList($("#location_to").val(), "to");
+		$("#cab_to").html("");
+		searchCityList($("#location_to").val(), "to","booking");
 	}
 	
 	if($("#location_to").val().length < 3 ){
@@ -35,6 +39,39 @@ $("#location_to").on("keyup", function(){
 		$("#cab_to").siblings("#to_lattitude").val("");
 		$("#cab_to").siblings("#to_longitude").val("");
 		$("#cab_to").hide();
+	}
+});
+
+//publish ride
+$("#leaving_from").on("keyup", function(){
+	
+	if($("#leaving_from").val().length == 3 ){
+		$("#cab_from_leaving").html("");
+		searchCityList($("#leaving_from").val(), "from","publishing");
+	}
+	
+	if($("#leaving_from").val().length < 3 ){
+		$("#cab_from_leaving").html("");
+		$("#cab_from_leaving").siblings("#from_lattitude_leaving").val("");
+		$("#cab_from_leaving").siblings("#from_longitude_leaving").val("");
+		$("#cab_from_leaving").hide();
+	}
+	
+});
+
+
+//publish rid
+$("#going_towards").on("keyup", function(){
+	if($("#going_towards").val().length == 3 ){
+		$("#cab_towards_going").html("");
+		searchCityList($("#going_towards").val(), "to","publishing");
+	}
+	
+	if($("#going_towards").val().length < 3 ){
+		$("#cab_towards_going").html("");
+		$("#cab_towards_going").siblings("#to_lattitude_going").val("");
+		$("#cab_towards_going").siblings("#to_longitude_going").val("");
+		$("#cab_towards_going").hide();
 	}
 });
 
@@ -71,18 +108,20 @@ $("#pay_proceed").on("click" , function(){
 	
 });
 
+
+
 $("#publish_cabs").on("click" , function(){
 	
 	$.ajax({
 		type : 'GET',
 		url : '/publishRide',
 		data : {
-			from : $("#leaving_from").val(),
-			to : $("#going_towards").val(),
-			vehicle : $("#cabType").val(),
-			cabnumber :  $("#cabNumber").val(),
-			cabdrivername :   $("#cabDriverName").val(),
-			no_passengers :  $("#no_of_passengers").val()
+			from_lattitude : $("#from_lattitude_leaving").val(),
+			from_longitude : $("#from_longitude_leaving").val(),
+			vehicle : $("#publishCabType").val(),
+			cabnumber :  $("#publishCabNumber").val(),
+			cabdrivername :   $("#publishCabDriverName").val(),
+			no_passengers :  $("#publish_no_of_passengers").val()
 		},
 		contentType: "application/json",
 		dataType: 'json',
@@ -95,14 +134,16 @@ $("#publish_cabs").on("click" , function(){
 		},
 		error : function (){
 			alert('error');
-			document.location.reload();
+			//document.location.reload();
 		}
 	});
 	
 });
 
+
 });
 
+// search cabs
 $(document).on('click',"#cab_from li label" , function() {
 	
 	$("#cab_from").siblings("#looking_from").val($(this).text().split(",")[0]);
@@ -120,6 +161,27 @@ $(document).on('click',"#cab_to li label" , function() {
 	$("#cab_to").siblings("#to_lattitude").val($(this).find(".to_lattitude").val());
 	$("#cab_to").siblings("#to_longitude").val($(this).find(".to_longitude").val());
 });
+
+//publish cabs
+$(document).on('click',"#cab_from_leaving li label" , function() {
+	
+	$("#cab_from_leaving").siblings("#from_location_leaving").val($(this).text().split(",")[0]);
+	$("#leaving_from").val($(this).text());
+	$("#cab_from_leaving").hide();
+	$("#cab_from_leaving").siblings("#from_lattitude_leaving").val($(this).find(".from_lattitude_leaving").val());
+	$("#cab_from_leaving").siblings("#from_longitude_leaving").val($(this).find(".from_longitude_leaving").val());
+	
+});
+
+$(document).on('click',"#cab_towards_going li label" , function() {
+	
+	$("#cab_towards_going").siblings("#going_to").val($(this).text().split(",")[0]);
+	$("#going_towards").val($(this).text());
+	$("#cab_towards_going").hide();
+	$("#cab_towards_going").siblings("#to_lattitude_going").val($(this).find(".to_lattitude_going").val());
+	$("#cab_towards_going").siblings("#to_longitude_going").val($(this).find(".to_longitude_going").val());
+});
+
 
 //search cabs from here
 function searchCabsInBetween(){
@@ -204,7 +266,7 @@ function searchCabsInBetween(){
 
 
 //get cities list from here
-function searchCityList(cityChars, processBy){
+function searchCityList(cityChars, processBy, purpose){
 	
 	$.ajax({
 		
@@ -217,24 +279,46 @@ function searchCityList(cityChars, processBy){
 			console.log(responseJson);
 			JSON.stringify(responseJson);
 			$.each(responseJson , function(key,value){
-				if(processBy == "from"){
-					$("#cab_from").show();
-					$("#cab_from").append(
-					'<li class="list-group-item"><label>'+
-					'<input type="hidden" class="from_lattitude" value="'+value[2]+'">'+
-					'<input type="hidden" class="from_longitude" value="'+value[3]+'">'+
-					'<input type="radio" name="from_city" value="'+value[0]+'"/>'+value[1]+' , '+value[4]+'</label></li>'
-				);
-				}
-				
-				if(processBy == "to"){
-					$("#cab_to").show();
-					$("#cab_to").append(
-					'<li class="list-group-item"><label>'+
-					'<input type="hidden" class="to_lattitude" value="'+value[2]+'">'+
-					'<input type="hidden" class="to_longitude" value="'+value[3]+'">'+
-					'<input type="radio" name="to_city" value="'+value[0]+'"/>'+value[1]+' , '+value[4]+'</label></li>'
-				);
+				if(purpose == "booking"){
+					if(processBy == "from"){
+						$("#cab_from").show();
+						$("#cab_from").append(
+						'<li class="list-group-item"><label>'+
+						'<input type="hidden" class="from_lattitude" value="'+value[2]+'">'+
+						'<input type="hidden" class="from_longitude" value="'+value[3]+'">'+
+						'<input type="radio" class="mr-1" name="from_city" value="'+value[0]+'"/>'+value[1]+' , '+value[4]+'</label></li>'
+					);
+					}
+					
+					if(processBy == "to"){
+						$("#cab_to").show();
+						$("#cab_to").append(
+						'<li class="list-group-item"><label>'+
+						'<input type="hidden" class="to_lattitude" value="'+value[2]+'">'+
+						'<input type="hidden" class="to_longitude" value="'+value[3]+'">'+
+						'<input type="radio" class="mr-1" name="to_city" value="'+value[0]+'"/>'+value[1]+' , '+value[4]+'</label></li>'
+					);
+					}
+				}else if(purpose == "publishing"){
+						if(processBy == "from"){
+						$("#cab_from_leaving").show();
+						$("#cab_from_leaving").append(
+						'<li class="list-group-item"><label class="mt-2">'+
+						'<input type="hidden" class="from_lattitude_leaving" value="'+value[2]+'">'+
+						'<input type="hidden" class="from_longitude_leaving" value="'+value[3]+'">'+
+						'<input type="radio" class="mr-1" name="from_city_leaving" value="'+value[0]+'"/>'+value[1]+' , '+value[4]+'</label></li>'
+					);
+					}
+					
+					if(processBy == "to"){
+						$("#cab_towards_going").show();
+						$("#cab_towards_going").append(
+						'<li class="list-group-item"><label class="mt-2">'+
+						'<input type="hidden" class="to_lattitude_going" value="'+value[2]+'">'+
+						'<input type="hidden" class="to_longitude_going" value="'+value[3]+'">'+
+						'<input type="radio" class="mr-1" name="to_city_going" value="'+value[0]+'"/>'+value[1]+' , '+value[4]+'</label></li>'
+					);
+					}
 				}
 			});
 			

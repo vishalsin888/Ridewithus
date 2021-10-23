@@ -21,4 +21,6 @@ public interface UserRegisterService{
 	public Boolean bookRide(String from, String to,String vehicle,String distance, String fare, String cardnumber, String cvv , String payeename);
 	
 	public ResponseEntity<List<RideBean>> getAllRides();
+	
+	public Boolean publishRide(String from_lattitude, String from_longitude,String vehicle,String cabnumber, String cabdrivername, String no_passengers);
 }
