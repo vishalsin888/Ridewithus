@@ -71,6 +71,36 @@ $("#pay_proceed").on("click" , function(){
 	
 });
 
+$("#publish_cabs").on("click" , function(){
+	
+	$.ajax({
+		type : 'GET',
+		url : '/publishRide',
+		data : {
+			from : $("#leaving_from").val(),
+			to : $("#going_towards").val(),
+			vehicle : $("#cabType").val(),
+			cabnumber :  $("#cabNumber").val(),
+			cabdrivername :   $("#cabDriverName").val(),
+			no_passengers :  $("#no_of_passengers").val()
+		},
+		contentType: "application/json",
+		dataType: 'json',
+        cache: false,
+		success : function(responseJson){
+			alert('succ');
+			
+			//document.location.reload();
+			
+		},
+		error : function (){
+			alert('error');
+			document.location.reload();
+		}
+	});
+	
+});
+
 });
 
 $(document).on('click',"#cab_from li label" , function() {
@@ -105,7 +135,8 @@ function searchCabsInBetween(){
 			from_lattitude : $("#from_lattitude").val(),
 			from_longitude : $("#from_longitude").val(),
 			to_lattitude : $("#to_lattitude").val(),
-			to_longitude : $("#to_longitude").val()
+			to_longitude : $("#to_longitude").val(),
+			passengers : $("#no_passenger").val()
 		},
 		dataType: 'json',
         cache: false,
@@ -152,7 +183,7 @@ function searchCabsInBetween(){
 				      '<td scope="row">'+cablogo+'</th>'+
 				      '<td class="from">'+$("#looking_from").val()+'</td>'+
 				      '<td class="to">'+$("#going_to").val()+'</td>'+
-				      '<td class="pass">'+$("#no_passenger").val()+'</td>'+
+				      '<td class="pass">'+value[6]+'</td>'+
 				      '<td class="c_type">'+value[1]+'</td>'+
 				      '<td class="c_num">'+value[2]+'</td>'+
 				      '<td class="d_name">'+value[3]+'</td>'+
@@ -220,29 +251,33 @@ function loadAllRides(){
 	
 	$.ajax({
 		type : 'GET',
-		url : '/bookRide',
-		data : {
-			from : $("#looking_from").val(),
-			to : $("#going_to").val(),
-			vehicle :$("."+pay_clz).parent(".bknow").siblings(".c_type").text(),
-			distance :  $("."+pay_clz).parent(".bknow").siblings(".dist").text(),
-			fare : $("."+pay_clz).parent(".bknow").siblings(".amt").text(),
-			cardnumber : $("#card-number").val(),
-			cvv : $("#cvv").val(),
-			payeename :$("#recipient-name").val()
-		},
+		url : '/myAllRides',
 		contentType: "application/json",
 		dataType: 'json',
         cache: false,
 		success : function(responseJson){
-			//alert('succ');
-			
-			window.location.href = "/allrides";
-			//document.location.reload();
+			console.log(responseJson);
+			JSON.stringify(responseJson);
+			$("#rides_data").show();
+			$("#ride_data_btn").hide();
+			$.each(responseJson , function(key,value){
+				$("#myrides_data").append(
+					'<tr>'+
+				      '<td class="from">'+value[0]+'</td>'+
+				      '<td class="to">'+value[1]+'</td>'+
+				      '<td class="pass">'+value[2]+'</td>'+
+				      '<td class="c_type">'+value[3]+'</td>'+
+				      '<td class="c_num">'+value[4]+'</td>'+
+				      '<td class="d_name">'+value[5]+'</td>'+
+				    '</tr>'
+				);
+			});
 			
 		},
 		error : function (){
-			//alert('error');
+			$("#rides_data").hide();
+			$("#ride_data_btn").show();
+			alert('error');
 			document.location.reload();
 		}
 	});

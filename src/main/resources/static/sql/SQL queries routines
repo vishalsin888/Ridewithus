@@ -14,14 +14,19 @@ END
 
 
 
-
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchCitiesList`(IN p_threeChars varchar(100))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `bookRide`(
+IN p_from varchar(100), 
+IN p_to varchar(100),
+IN p_vehicle varchar(100), 
+IN p_distance varchar(100), 
+IN p_fare varchar(100),
+IN p_cardnumber varchar(100),
+IN p_cvv varchar(100),
+IN p_payeename varchar(100)
+)
 BEGIN
-SELECT distinct cityid, cityname,lattitude , longitude 
-FROM carpool.cities 
-where lower(cityname) LIKE concat(p_threeChars , '%')
-order by cityname;
+insert into recent_rides 
+values (FLOOR(RAND()*(1000000)),p_from,p_to,p_vehicle,p_distance,p_fare,p_cardname,p_cvv,p_payeename);
 END
 
 
@@ -32,11 +37,118 @@ IN p_to varchar(100),
 IN p_from_lattitude varchar(100), 
 IN p_from_longitude varchar(100), 
 IN p_to_lattitude varchar(100),
-IN p_to_longitude varchar(100)
+IN p_to_longitude varchar(100),
+IN p_passengers varchar(100)
 )
 BEGIN
 SELECT distinct round(get_distance(p_from_lattitude,p_from_longitude,p_to_lattitude,p_to_longitude)),
- cabname , cabnumber , cabdrivername , cablattitude , cablongitude
+ cabname , cabnumber , cabdrivername , cablattitude , cablongitude , passengers
 FROM carpool.cabs
 where cablattitude = p_from_lattitude and cablongitude = p_from_longitude;
 END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchCitiesList`(IN p_threeChars varchar(100))
+BEGIN
+SELECT distinct cityid, cityname,lattitude , longitude , country
+FROM carpool.cities 
+where lower(cityname) LIKE concat(p_threeChars , '%')
+order by cityname;
+END
+
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllRides`()
+BEGIN
+select fromm , towards ,vehicle , distance, fare , payeename
+from recent_rides;
+END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `saveBookedRide`(
+IN p_from varchar(100), 
+IN p_to varchar(100),
+IN p_vehicle varchar(100), 
+IN p_distance varchar(100), 
+IN p_fare varchar(100),
+IN p_cardnumber varchar(100),
+IN p_cvv varchar(100),
+IN p_payeename varchar(100)
+)
+BEGIN
+insert into recent_rides 
+values (FLOOR(RAND()*(1000000)),p_from,p_to,p_vehicle,p_distance,p_fare,p_cardnumber,p_cvv,p_payeename);
+END
+
+
+Table data
+
+'1', 'XUV', '1111', 'ABC', '19.05', '72.90', '4'
+'2', 'SEDAN', '2222', 'DEF', '19.10', '72.85', '4'
+'3', 'PRIME', '3333', 'GHJ', '19.15', '72.80', '3'
+'4', 'AUTO', '4444', 'KLM', '19.05', '72.75', '2'
+'5', 'MICRO', '5555', 'MOP', '19.20', '72.70', '4'
+'6', 'MINI', '6666', 'PQR', '19.25', '72.65', '2'
+'7', 'PLAY', '7777', 'AHH', '19.30', '72.60', '5'
+'8', 'XUV', '8888', 'KJUI', '19.35', '72.55', '3'
+'9', 'SEDAN', '9999', 'KIIU', '19.40', '72.50', '4'
+'10', 'AUTO', '0000', 'LPO', '19.45', '72.45', '2'
+'11', 'MICRO', '1122', 'GYT', '19.50', '72.40', '4'
+'12', 'PRIME', '3344', 'PFG', '19.55', '72.35', '2'
+'13', 'XUV', '4455', 'GFHJ', '19.60', '72.30', '4'
+'14', 'ACCESS', '5566', 'YGHB', '19.05', '72.90', '2'
+'15', 'PLAY', '6677', 'LIUY', '19.10', '72.85', '4'
+'16', 'MICRO', '7788', 'PGDF', '19.15', '72.80', '2'
+'17', 'SEDAN', '8899', 'REW', '19.05', '72.75', '3'
+'18', 'MINI', '1133', 'VFD', '19.20', '72.70', '4'
+'19', 'AUTO', '1144', 'MEW', '19.25', '72.65', '3'
+'20', 'PRIME', '1155', 'XZXD', '19.30', '72.60', '4'
+'21', 'XUV', '1166', 'FDE', '19.35', '72.55', '2'
+'22', 'PLAY', '1177', 'MKO', '19.40', '72.50', '3'
+'23', 'AUTO', '1188', 'PPP', '19.45', '72.45', '4'
+'24', 'MICRO', '1199', 'UUU', '19.50', '72.40', '2'
+'25', 'PRIME', '2211', 'TRT', '19.55', '72.35', '4'
+'26', 'XUV', '2233', 'PRC', '19.60', '72.30', '3'
+
+
+City data
+'1', 'Mumbai', '19.05', '72.90', 'India'
+'2', 'Delhi', '19.10', '72.85', 'India'
+'3', 'Chennai', '19.15', '72.80', 'India'
+'4', 'Banglore', '19.20', '72.75', 'India'
+'5', 'Hyderabad', '19.25', '72.70', 'India'
+'6', 'Nagpur', '19.30', '72.65', 'India'
+'7', 'Ahemdabad', '19.35', '72.60', 'India'
+'8', 'Surat', '19.40', '72.55', 'India'
+'9', 'Thane', '19.45', '72.50', 'India'
+'10', 'Pune', '19.50', '72.45', 'India'
+'11', 'Nashik', '19.55', '72.40', 'India'
+'12', 'Pandharpur', '19.60', '72.35', 'India'
+'13', 'Ahemadnagar', '19.65', '72.30', 'India'
+'14', 'Mumbra', '19.70', '72.25', 'India'
+
+
+recent rides
+'118036', 'Mumbai ', 'Chennai ', 'XUV', '15 Km', ' ₹ 45', '34454566788900', '986', 'kuhisr oireg'
+'139595', 'Delhi ', 'Hyderabad ', 'SEDAN', '23 Km', ' ₹ 69', '3445556566777', '777', 'retgre rty'
+'302565', 'Chennai ', 'Mumbai ', 'MICRO', '15 Km', ' ₹ 45', '456456844564564', '447', 'kjuih7u uhyugug'
+'422260', 'Delhi ', 'Hyderabad ', 'SEDAN', '23 Km', ' ₹ 69', '66677755533232', '561', 'ftht rthgrt'
+'475562', 'Chennai ', 'Hyderabad ', 'MICRO', '15 Km', ' ₹ 45', '3432323233333', '333', 'dsgdsgdfg'
+'602669', 'Delhi ', 'Chennai ', 'PLAY', '8 Km', ' ₹ 24', '222222222222222', '456', 'drfgrtvg6ry'
+'634113', 'Delhi ', 'Hyderabad ', 'SEDAN', '23 Km', ' ₹ 69', '1541378517121', '177', 'fkdf kjdsgf'
+'736571', 'Delhi ', 'Chennai ', 'PLAY', '8 Km', ' ₹ 24', '34534534523', '909', 'xfgvt'
+'758925', 'Delhi ', 'Mumbai ', 'SEDAN', '8 Km', ' ₹ 24', '122222222222222', '111', 'srdgrewgrewtgy'
+'762539', 'Delhi ', 'Banglore ', 'SEDAN', '15 Km', ' ₹ 45', '6565666665443', '208', 'xfg vfhbtyjuj'
+
+
+USER DATA
+'1', 'vishu@aaa.aaa', '1111111111', 'vishalsin', '111111'
+'2', 'vishu@aaa.aab', '4444444444', 'Vishu', '44444'
+'3', 'vishu@aaa.aac', '8855885588', 'prashant_49', '885588'
+'4', 'vishu@aaa.aad', '333333333', 'vishalsin1', '3333'
+'5', 'vishu@aaa.aae', '7777', 'vishu', '7777'
+'6', 'nav@nn.nn', '2222222222', 'nav', '1111'
+'7', 'aa@aa.aa', '1111', 'aa', '1111'
+
+
+

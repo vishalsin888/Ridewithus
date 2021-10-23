@@ -1,11 +1,11 @@
 <%@include file="header.jsp"%>
 
-<div class="bootstrap-wrapper" style="padding-top: 5%;">
+<div class="bootstrap-wrapper" style="padding-top: 2%;">
 	<div class="publishpage" id="home_page">
-		<div class="container-fluid" style="height: 80vh;">
+		<div class="container-fluid" style="height: 90vh;">
 			<div class="row align-items-center">
 				<div class="col-md-12 text-center my-5 py-5">
-					<h2 class="py-5">Become a Driver and save on travel costs by
+					<h2 class="py-4">Become a Driver and save on travel costs by
 						sharing your ride with passengers.</h2>
 					<div class="container-fluid">
 						<div class="row">
@@ -14,29 +14,61 @@
 									<div class="row">
 										<div class="col-md-3 offset-md-1">
 											<div class="card" style="color: blue;">
+											 <h5 class="bg-primary py-2 mb-0" style="color: white;">Publish Ride</h5>
 												<div class="card-body">
-													 <h5 class="bg-primary py-2" style="color: white;">Publish Ride</h5>
-													<div class="input-group mb-3 mt-4">
+													<div class="input-group mb-2">
 														<div class="input-group-prepend">
 															<span class="input-group-text" id="basic-addon1"><i class="fas fa-plane-departure" style="color: #5e066e;"></i></span>
 														</div>
-														<input type="text" class="form-control"
-															placeholder="Leaving from.." aria-label="Username"
+														<input type="text" class="form-control" id="leaving_from"
+															placeholder="Leaving from..." aria-label="Username"
 															aria-describedby="basic-addon1">
 													</div>
-													<div class="input-group mb-4">
+													<div class="input-group mb-2">
 														<div class="input-group-prepend">
 															<span class="input-group-text" id="basic-addon1"><i class="fas fa-plane-arrival" style="color: #5e066e;"></i></span>
 														</div>
-														<input type="text" class="form-control"
-															placeholder="Going to.." aria-label="Username"
+														<input type="text" class="form-control" id="going_towards"
+															placeholder="Going to..." aria-label="Username"
 															aria-describedby="basic-addon1">
 													</div>
-													<div class="input-group mb-4">
+													<div class="input-group mb-2">
+														<div class="input-group-prepend">
+															<label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-taxi" style="color: #5e066e;"></i></label>
+														</div>
+														<select class="custom-select" id="cabType">
+															<option selected disabled="disabled">Choose...</option>
+															<option value="PRIME">PRIME</option>
+															<option value="SEDAN">SEDAN</option>
+															<option value="ACCESS">ACCESS</option>
+															<option value="XUV">XUV</option>
+															<option value="MINI">MINI</option>
+															<option value="SEDAN">AUTO</option>
+															<option value="ACCESS">MICRO</option>
+															<option value="XUV">PLAY</option>
+														</select>
+													</div>
+													<div class="input-group mb-2">
+														<div class="input-group-prepend">
+															<span class="input-group-text" id="basic-addon1"><i class="fas fa-address-card" style="color: #5e066e;"></i></span>
+														</div>
+														<input type="text" class="form-control" id="cabNumber"
+															placeholder="vehicle Number" aria-label="Username"
+															aria-describedby="basic-addon1">
+													</div>
+													<div class="input-group mb-2">
+														<div class="input-group-prepend">
+															<span class="input-group-text" id="basic-addon1"><i class="fas fa-id-badge" style="color: #5e066e;"></i></span>
+														</div>
+														<input type="text" class="form-control" id="cabDriverName"
+															placeholder="Driver Name" aria-label="Username"
+															aria-describedby="basic-addon1">
+													</div>
+													<div class="input-group mb-2">
 														<div class="input-group-prepend">
 															<label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-user-friends" style="color: #5e066e;"></i></label>
 														</div>
-														<select class="custom-select" id="inputGroupSelect01">
+														<select class="custom-select" id="no_of_passengers">
 															<option selected disabled="disabled">Choose...</option>
 															<option value="1">One</option>
 															<option value="2">Two</option>

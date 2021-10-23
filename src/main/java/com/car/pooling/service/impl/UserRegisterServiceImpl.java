@@ -26,6 +26,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 	private final static String CITIES_PROC = ".fetchCitiesList";
 	private final static String CABS_PROC = ".fetchCabsList";
 	private final static String BOOKRIDE_PROC = ".saveBookedRide";
+	private final static String GETALL_RIDES = ".getAllRides";
 	
 	@Autowired
 	private RegisterUserRepo registerUserRepo;
@@ -62,7 +63,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 
 	//getCabs list using procs
 	@Override
-	public ResponseEntity<List<CabsBean>> getCabs(String from, String to,String from_lattitude,String from_longitude, String to_lattitude, String to_longitude) {
+	public ResponseEntity<List<CabsBean>> getCabs(String from, String to,String from_lattitude,String from_longitude, String to_lattitude, String to_longitude,String passengers) {
 		
 		String dbName = env.getProperty("spring.jpa.properties.hibernate.default_schema");
 		StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery(dbName + CABS_PROC);
@@ -72,6 +73,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
         query.registerStoredProcedureParameter("p_from_longitude", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("p_to_lattitude", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("p_to_longitude", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("p_passengers", String.class, ParameterMode.IN);
         
         query.setParameter("p_from", from);
         query.setParameter("p_to", to);
@@ -79,6 +81,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
         query.setParameter("p_from_longitude", from_longitude);
         query.setParameter("p_to_lattitude", to_lattitude);
         query.setParameter("p_to_longitude", to_longitude);
+        query.setParameter("p_passengers", passengers);
         
 		return ResponseEntity.ok(query.getResultList());
 		
@@ -110,6 +113,15 @@ public class UserRegisterServiceImpl implements UserRegisterService{
         query.setParameter("p_payeename", payeename);
         boolean flag = query.execute();
         return flag;
+	}
+	
+	@Override
+	public ResponseEntity<List<RideBean>> getAllRides() {
+		
+		String dbName = env.getProperty("spring.jpa.properties.hibernate.default_schema");
+		StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery(dbName + GETALL_RIDES);
+		return ResponseEntity.ok(query.getResultList());
+		
 	}
 
 

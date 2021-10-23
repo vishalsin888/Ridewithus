@@ -48,9 +48,10 @@ public class RegisterController {
 			@RequestParam("from_lattitude") String from_lattitude, 
 			@RequestParam("from_longitude") String from_longitude, 
 			@RequestParam("to_lattitude") String to_lattitude,
-			@RequestParam("to_longitude") String to_longitude
+			@RequestParam("to_longitude") String to_longitude,
+			@RequestParam("passengers") String passengers
 			){
-		return this.userRegisterService.getCabs(from, to, from_lattitude, from_longitude,to_lattitude, to_longitude);
+		return this.userRegisterService.getCabs(from, to, from_lattitude, from_longitude,to_lattitude, to_longitude,passengers);
 	}
 	
 	@GetMapping("/bookRide")
@@ -65,6 +66,11 @@ public class RegisterController {
 			@RequestParam("payeename") String payeename
 			){
 		return this.userRegisterService.bookRide(from, to, vehicle, distance,fare, cardnumber,cvv,payeename);
+	}
+	
+	@GetMapping("/myAllRides")
+	public ResponseEntity<?> getAllRides(){
+		return this.userRegisterService.getAllRides();
 	}
 	
 	

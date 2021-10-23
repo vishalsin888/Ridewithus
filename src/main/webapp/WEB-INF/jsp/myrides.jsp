@@ -27,11 +27,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h3 class="text-center my-2">Recent rides</h3>
-				<div class="container-fluid text-center my-3">
+				<div class="container-fluid text-center my-3" id="rides_data_btn">
 					<a class="btn btn-success" onclick="loadAllRides()" style="color:white;"> All Rides</a>
 				</div>
 
-				<div class="container text-center my-3"
+				<div class="container text-center my-3" id="rides_data"
 					style="display: none;background: linear-gradient(to top, #5172657a 0%, #64555633 100%);">
 					<div class="row">
 						<div class="col-md-12">
@@ -43,7 +43,6 @@
 										<th scope="col">Cab Type</th>
 										<th scope="col">Distance</th>
 										<th scope="col">Fare</th>
-										<th scope="col">Distance</th>
 										<th scope="col">Booked By</th>
 									</tr>
 								</thead>
