@@ -102,6 +102,13 @@ update carpool.hibernate_sequence set next_val = seq_number+1;
 commit;
 END
 
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllVehicles`()
+BEGIN
+select vehiclename , vehicle_number ,vehicle_type , vehicle_driver_name , vehicle_no_of_passengers
+from vehicle_bean;
+END
+
 Table data
 
 '1', 'XUV', '1111', 'ABC', '19.05', '72.90', '4'
