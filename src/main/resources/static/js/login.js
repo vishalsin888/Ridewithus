@@ -22,8 +22,7 @@ function submitLoginForm(){
 		dataType: 'json',
         cache: false,
 		success : function(){
-		
-			window.location.href = "/dashboard";
+			window.location.href = "/homepage";
 		},
 		error : function (){
 			alert('error');

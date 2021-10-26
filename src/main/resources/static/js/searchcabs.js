@@ -1,7 +1,4 @@
-/**
- * 
- */
- 
+
 $(document).ready(function(){
 	
 $("#search_cabs").on("click", function(event){
@@ -94,10 +91,7 @@ $("#pay_proceed").on("click" , function(){
 		dataType: 'json',
         cache: false,
 		success : function(responseJson){
-			//alert('succ');
-			
-			window.location.href = "/allrides";
-			//document.location.reload();
+			window.location.href="/allrides";
 			
 		},
 		error : function (){
@@ -107,7 +101,6 @@ $("#pay_proceed").on("click" , function(){
 	});
 	
 });
-
 
 
 $("#publish_cabs").on("click" , function(){
@@ -127,9 +120,7 @@ $("#publish_cabs").on("click" , function(){
 		dataType: 'json',
         cache: false,
 		success : function(responseJson){
-			alert('succ');
-			
-			//document.location.reload();
+			showSuccess("/publishride");
 			
 		},
 		error : function (){
@@ -378,6 +369,3 @@ function bookCab(clz){
 function closePay(){
 	$("#paymentModal").hide();
 }
-
-
- 

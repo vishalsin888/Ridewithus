@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.car.pooling.models.CabsBean;
+import com.car.pooling.models.FeedbackUser;
 import com.car.pooling.models.RegisterUser;
 import com.car.pooling.models.RideBean;
+import com.car.pooling.models.VehicleBean;
 import com.car.pooling.service.UserRegisterService;
 
 @RestController
@@ -85,9 +87,25 @@ public class RegisterController {
 			@RequestParam("cabdrivername") String cabdrivername,
 			@RequestParam("no_passengers") String no_passengers
 			){
-		System.out.println("in publish");
 		return this.userRegisterService.publishRide(from_lattitude, from_longitude, vehicle, cabnumber, cabdrivername, no_passengers);
 	}
+	
+	
+	@PostMapping("/sendFeedback")
+	public FeedbackUser sendFeedback(@RequestBody FeedbackUser feeduser,ModelMap model) {
+		model.addAttribute("LoggedIn", "LoggedIn");
+		return this.userRegisterService.sendFeedback(feeduser);
+	}
 		
+	@PostMapping("/addVehicle")
+	public VehicleBean addVehicles(@RequestBody VehicleBean vehicleBean,ModelMap model) {
+		model.addAttribute("LoggedIn", "LoggedIn");
+		return this.userRegisterService.addVehicles(vehicleBean);
+	}
+		
+	@GetMapping("/myAllVehicles")
+	public ResponseEntity<?> getAllVehicles(){
+		return this.userRegisterService.getAllVehicles();
+	}
 
 }

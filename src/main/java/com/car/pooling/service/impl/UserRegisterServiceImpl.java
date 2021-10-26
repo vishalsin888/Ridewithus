@@ -14,10 +14,14 @@ import org.springframework.stereotype.Service;
 
 import com.car.pooling.models.CabsBean;
 import com.car.pooling.models.CityBean;
+import com.car.pooling.models.FeedbackUser;
 import com.car.pooling.models.RegisterUser;
 import com.car.pooling.models.RideBean;
+import com.car.pooling.models.VehicleBean;
 import com.car.pooling.repo.BookRideRepo;
+import com.car.pooling.repo.FeedbackUserRepo;
 import com.car.pooling.repo.RegisterUserRepo;
+import com.car.pooling.repo.VehicleRepo;
 import com.car.pooling.service.UserRegisterService;
 
 @Service
@@ -28,9 +32,16 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 	private final static String BOOKRIDE_PROC = ".saveBookedRide";
 	private final static String GETALL_RIDES = ".getAllRides";
 	private final static String PUBLISH_RIDE = ".publishRide";
+	private final static String GETALL_VEHICLES = ".getAllVehicles";
 	
 	@Autowired
 	private RegisterUserRepo registerUserRepo;
+	
+	@Autowired
+	private FeedbackUserRepo feedbackUserRepo;
+	
+	@Autowired
+	private VehicleRepo vehicleRepo;
 	
     @Autowired
     private EntityManager entityManager;
@@ -149,6 +160,25 @@ public class UserRegisterServiceImpl implements UserRegisterService{
         return flag;
 	}
 
+	@Override
+	public FeedbackUser sendFeedback(FeedbackUser feeduser) {
+		// TODO Auto-generated method stub
+		return this.feedbackUserRepo.save(feeduser);
+	}
+
+	@Override
+	public VehicleBean addVehicles(VehicleBean vehicleBean) {
+		// TODO Auto-generated method stub
+		return this.vehicleRepo.save(vehicleBean);
+	}
+
+	@Override
+	public ResponseEntity<List<VehicleBean>> getAllVehicles() {
+		// TODO Auto-generated method stub
+		String dbName = env.getProperty("spring.jpa.properties.hibernate.default_schema");
+		StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery(dbName + GETALL_VEHICLES);
+		return ResponseEntity.ok(query.getResultList());
+	}
 
 
 }

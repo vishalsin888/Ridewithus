@@ -28,10 +28,8 @@ function submitRegisterForm(){
 		dataType: 'json',
         cache: false,
 		success : function(){
-			//alert('success');
-			//$("#user_reg_form").empty();
-			window.location.href = "/login";
-			document.location.reload();
+			window.location.href="/login";
+			//document.location.reload();
 		},
 		error : function (){
 			alert('error');

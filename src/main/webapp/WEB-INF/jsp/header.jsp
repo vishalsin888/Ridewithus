@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
+    <%@include file="success.jsp"%>
 	<c:set var="LoginStatus" value="${LoggedIn}" />
 	<input type="hidden" id="loginStatus" value="">
 	<nav
@@ -35,29 +36,36 @@
 				<ul class="navbar-nav ml-auto header_links px-5">
 					<c:choose>
 						<c:when test="${LoginStatus eq 'NotLoggedIn'}">
-							<li class="nav-item active"><a class="nav-link mr-2"
+							<li class="nav-item active hover-underline-animation"><a class="nav-link mr-2"
 								style="font-weight: bold;" href="/">Home</a></li>
-							<li class="nav-item active" style="font-weight: bold;">
+							<li class="nav-item active hover-underline-animation"" style="font-weight: bold;">
 					                <a class="nav-link" href="/aboutus">About Us</a>
 					        </li> 
-							<li class="nav-item active"><a class="nav-link mr-2"
+							<li class="nav-item active hover-underline-animation"><a class="nav-link mr-2"
 								style="font-weight: bold;" href="/login">Log In</a>
 							</li>
-							<li class="nav-item active mr-2"><a class="nav-link"
+							<li class="nav-item active mr-2 hover-underline-animation"><a class="nav-link"
 								style="font-weight: bold;" href="/signup">Sign Up</a>
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li class="nav-item active"><a class="nav-link mr-2"
+							<li class="nav-item active hover-underline-animation"><a class="nav-link mr-2"
+								style="font-weight: bold;" href="/homepage">Home</a></li>
+							<li class="nav-item active hover-underline-animation"><a class="nav-link mr-2"
 								style="font-weight: bold;" href="/allrides">My Rides</a>
 							</li>
-							<li class="nav-item active"><a class="nav-link mr-2"
+							<li class="nav-item active hover-underline-animation"><a class="nav-link mr-2"
 								style="font-weight: bold;" href="/dashboard">Search</a>
 							</li>
-							<li class="nav-item active"><a class="nav-link mr-2"
+							<li class="nav-item active hover-underline-animation"><a class="nav-link mr-2"
+								style="font-weight: bold;" href="/myvehicles">My Vehicles</a>
+							</li>
+							<li class="nav-item active hover-underline-animation"><a class="nav-link mr-2"
 								style="font-weight: bold;" href="/publishride">Publish Ride</a>
 							</li>
-							<li class="nav-item active"><a class="nav-link mr-2"
+							<li class="nav-item active hover-underline-animation"><a class="nav-link mr-2"
+								style="font-weight: bold;" href="/contactus">Contact US</a></li>
+							<li class="nav-item active hover-underline-animation"><a class="nav-link mr-2"
 								style="font-weight: bold;" href="/">Logout</a>
 							</li>
 						</c:otherwise>
@@ -84,4 +92,5 @@
 	<script type="text/javascript" src="js/register.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 	<script type="text/javascript" src="js/searchcabs.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </body>

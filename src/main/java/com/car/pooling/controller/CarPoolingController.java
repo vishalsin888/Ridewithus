@@ -32,6 +32,12 @@ public class CarPoolingController {
 		return "aboutus";
 	}
 	
+	@RequestMapping(value = "/homepage")
+	public String afterLoginShow(ModelMap model) {
+		model.addAttribute("LoggedIn", "LoggedIn");
+		return "homepage";
+	}
+	
 	@RequestMapping(value = "/dashboard")
 	public String afterLogin(ModelMap model) {
 		model.addAttribute("LoggedIn", "LoggedIn");
@@ -49,6 +55,20 @@ public class CarPoolingController {
 		model.addAttribute("LoggedIn", "LoggedIn");
 		
 		return "myrides";
+	}
+	
+	@RequestMapping(value = "/contactus")
+	public String contactus(ModelMap model) {
+		model.addAttribute("LoggedIn", "LoggedIn");
+		
+		return "contactus";
+	}
+	
+	@RequestMapping(value = "/myvehicles")
+	public String myVehicles(ModelMap model) {
+		model.addAttribute("LoggedIn", "LoggedIn");
+		
+		return "myvehicles";
 	}
 	
 }

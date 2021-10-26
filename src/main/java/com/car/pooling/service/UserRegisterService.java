@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 
 import com.car.pooling.models.CabsBean;
 import com.car.pooling.models.CityBean;
+import com.car.pooling.models.FeedbackUser;
 import com.car.pooling.models.RegisterUser;
 import com.car.pooling.models.RideBean;
+import com.car.pooling.models.VehicleBean;
 
 public interface UserRegisterService{
 
@@ -23,4 +25,10 @@ public interface UserRegisterService{
 	public ResponseEntity<List<RideBean>> getAllRides();
 	
 	public Boolean publishRide(String from_lattitude, String from_longitude,String vehicle,String cabnumber, String cabdrivername, String no_passengers);
+	
+	public FeedbackUser sendFeedback(FeedbackUser feeduser);
+	
+	public VehicleBean addVehicles(VehicleBean vehicleBean);
+	
+	public ResponseEntity<List<VehicleBean>> getAllVehicles();
 }
